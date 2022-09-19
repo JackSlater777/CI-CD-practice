@@ -1,0 +1,28 @@
+name: Code checks  # имя
+
+on:  # на какие события срабатывает pipeline
+  push: # срабатывает на push...
+    branches: [ master ]  # ... в бранч master
+  pull_request: # срабатывает на pull request...
+    branches: [ master ]  # ... в бранч master
+
+jobs:  # что будет выполнено, когда произойдет какое-либо событие, указанное выше
+  build:
+    runs-on: ubuntu-latest  # версия OS
+    strategy:  # блок для выполнения тестов на нескольких версиях питона
+      matrix:  # Параллельный запуск job'ов
+        python-version: [3.8, 3.9]
+    steps:
+      - uses: actions/checkout@v2  # создается образ репозитория, в котором будут выполнены дальнейшие шаги
+      - name: Install python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2  # устанавливается питон
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install deps  # Это блок-ран, блок последовательных команд
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Run Unit tests  # Запускаем тесты в текущей дирректории
+        run: |
+          python -m pytest -s -v src/test_func.py --alluredir=results
+          allure serve results
