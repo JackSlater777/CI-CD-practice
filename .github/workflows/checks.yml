@@ -18,7 +18,7 @@ jobs:  # что будет выполнено, когда произойдет �
         uses: actions/setup-python@v2  # устанавливается питон
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Install deps  # Это блок-ран, блок последовательных команд
+      - name: Install deps  # Это блок-ран, блок последовательных команд, установка зависимостей
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
