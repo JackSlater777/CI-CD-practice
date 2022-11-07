@@ -1,1 +1,1 @@
-Practicing in pipeline creation using github actions
+To edit pipeline options go to .github/workflows/ and open .yml-file.
