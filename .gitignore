@@ -2,6 +2,7 @@
 results/
 # Venv
 venv/
+testenv/
 # Idea
 .idea/
 # Pytest

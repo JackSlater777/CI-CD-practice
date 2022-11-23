@@ -26,5 +26,3 @@ jobs:  # что будет выполнено, когда произойдет �
         run: python -m pytest -s -v tests/test_func.py --alluredir=results
       - name: Run Alternative Tests  # Запускаем альтернативные тесты
         run: python -m pytest -s -v tests_alternative/test_func.py
-      - name: Run Allure Report  # Запускаем отчет allure
-        run: python -m allure serve results
